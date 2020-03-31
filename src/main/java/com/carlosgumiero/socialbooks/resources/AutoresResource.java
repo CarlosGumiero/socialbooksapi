@@ -18,6 +18,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.carlosgumiero.socialbooks.domain.Autor;
 import com.carlosgumiero.socialbooks.services.AutoresService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = "Autores")
 @RestController
 @RequestMapping("/autores")
 public class AutoresResource {
@@ -25,12 +29,14 @@ public class AutoresResource {
 	@Autowired
 	private AutoresService autoresService;
 	
+	@ApiOperation("Lista os autores")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Autor>> listar() {
 		List<Autor> autores = autoresService.listar();
 		return ResponseEntity.status(HttpStatus.OK).body(autores);
 	}
 	
+	@ApiOperation("Salva um autor")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@Valid @RequestBody Autor autor) {
 		autor = autoresService.salvar(autor);
@@ -40,6 +46,7 @@ public class AutoresResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiOperation("Busca um autor por ID")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Autor> buscar(@PathVariable("id") Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(autoresService.buscar(id));
