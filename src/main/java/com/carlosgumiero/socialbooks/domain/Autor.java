@@ -27,7 +27,6 @@ public class Autor {
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@JsonInclude(Include.NON_NULL)
-	@NotEmpty(message = "O campo nascimento não pode ser vazio.")
 	private Date nascimento;
 	
 	@JsonInclude(Include.NON_NULL)
